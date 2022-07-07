@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <!-- import CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <style>
+
+        .login-box {
+            margin-top: 10%;
+            margin-left: 30%;
+            height: 50px;
+        }
+
+        /deep/.login-box.el-input {
+            height: 50px;
+        }
+
+        .el-input__inner {
+            height: 40px;
+            width: 200px;
+            font-family: "Microsoft";
+            font-size: 20px;
+        }
+
+        .el-input-group__prepend {
+            font-family: "Microsoft";
+            font-size: 30px;
+        }
+
+        .login-button {
+            margin-top: 27.8%;
+            margin-left: 8%;
+            z-index: 1000;
+        }
+
+    </style>
+
+
+
+</head>
+<body>
+  <div id="app">
+    <el-form :model="form" label-width="80px" class="login-box">
+        <el-form-item label="图书编号">
+            <el-input v-model="form.book_code" type="str">
+            </el-input>
+        </el-form-item>
+        <el-form-item label="书名">
+            <el-input v-model="form.book_name" type="str">
+            </el-input>
+        </el-form-item>
+        <el-form-item label="作者">
+            <el-input v-model="form.book_writer" type="str">
+            </el-input>
+        </el-form-item>
+        <el-form-item label="出版社">
+            <el-input v-model="form.book_house" type="str">
+            </el-input>
+        </el-form-item>
+        <el-form-item label="图书类型">
+            <el-input v-model="form.book_type" type="str">
+            </el-input>
+        </el-form-item>
+        <el-form-item label="图书数量">
+            <el-input v-model="form.book_num" type="str">
+            </el-input>
+        </el-form-item>
+        <el-form-item label="图书位置" type="str">
+            <el-input v-model="form.book_position">
+            </el-input>
+        </el-form-item>
+    </el-form>
+      <el-button type="primary" class="login-button" @click="todata()">录入</el-button>
+<!--      @click为绑定事件的一个标签，主要是methods-->
+
+  </div>
+  <div>
+
+
+
+  </div>
+
+</body>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+  <script>
+
+    var app = new Vue({
+      el: '#app',
+      data: function() {
+        return {
+            form:{
+                book_code:"",
+                book_name:"",
+                book_writer:"",
+                book_house:"",
+                book_type:"",
+                book_num:"",
+                book_position:""
+            }
+        };
+      },
+      methods: {
+           todata(){
+            $.ajax({
+                    type: 'POST',
+                    url: "http://127.0.0.1:8000/app01/test/",
+                    data: {
+                    name:"成功",
+                    book_code:this.form.book_code,
+                    book_name:this.form.book_name,
+                    book_writer:this.form.book_writer,
+                    book_house:this.form.book_house,
+                    book_type:this.form.book_type,
+                    book_num:this.form.book_num,
+                    book_position:this.form.book_position
+                    },
+                    dataType:"text"
+
+                   });
+
+            }
+        }
+
+    })
+
+
+  </script>
+</html>

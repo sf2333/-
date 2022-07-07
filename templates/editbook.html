@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block title %}
+    <title>编辑书籍</title>
+{% endblock title %}
+
+{% block head %}
+    <li><a href="/books">书籍管理界面</a></li>
+    <li><a href="">编辑书籍</a></li>
+{% endblock head %}
+
+{% block body %}
+
+    <form action="" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="">书名</label>
+            <input type="text" name="name" class="form-control" value="{{ book_obj.name }}">
+        </div>
+        <div class="form-group">
+            <label for="">作者</label>
+            <input type="text" name="author" class="form-control" value="{{ book_obj.author }}">
+        </div>
+        <div class="form-group">
+            <label for="">出版社</label>
+            <input type="text" name="house" class="form-control" value="{{ book_obj.house }}">
+        </div>
+        <div class="form-group">
+            <label for="">出版时间</label>
+            <input type="date" name="pub_date" class="form-control" value="{{ book_obj.pub_date|date:"Y-m-d" }}">
+        </div>
+        <div class="form-group">
+            <label for="">价格</label>
+            <input type="text" name="price" class="form-control" value="{{ book_obj.price }}">
+        </div>
+        <div class="form-group">
+            <label for="">总量</label>
+            <input type="text" name="sum" class="form-control" value="{{ book_obj.sum }}">
+        </div>
+        <!-- 设置剩余量无法编辑  disabled="disabled" -->
+        <div class="form-group">
+            <label for="">当前剩余</label>
+            <input type="text" name="sum" class="form-control" disabled="disabled" value="{{ book_obj.remain }}">
+        </div>
+        <div class="form-group">
+            <label for="">存放位置</label>
+            <input type="text" name="pos" class="form-control" value="{{ book_obj.pos }}">
+        </div>
+        <input type="submit" class="btn btn-default">
+
+    </form>
+{% endblock body %}
+

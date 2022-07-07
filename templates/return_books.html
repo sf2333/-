@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block title %}
+    <title>还书界面</title>
+{% endblock title %}
+
+{% block head %}
+    <li><a href="/books">书籍管理界面</a></li>
+    <li><a href="">还书界面</a></li>
+{% endblock head %}
+
+{% block return %}
+    <nav aria-label="...">
+
+    </nav>
+
+{% endblock return %}
+
+{% block body %}
+    <table class="table table-bordered table-hover table-striped">
+        <thead>
+        <tr>
+            <th>状态编号</th>
+            <th>编号</th>
+            <th>书籍名称</th>
+            <th>存放位置</th>
+            <th>借阅日期</th>
+            <th>归还期限</th>
+            <th>归还日期</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+            {% for borrow,book in return_obj_list %}
+            <tr>
+                <td>{{ borrow.s_id.s_id }}</td>
+                <td>{{ book.id }}</td>
+                <td>{{ book.name }}</td>
+                <td>{{ book.pos }}</td>
+                <td>{{ borrow.out_date | date:"Y-m-d H:m:s" }}</td>
+                <td>{{ borrow.on_date | date:"Y-m-d H:m:s" }}</td>
+                <td>{{ borrow.r_date | date:"Y-m-d H:m:s" }}</td>
+
+                {% if borrow.r_date == null %}
+                    <td>
+                        <a href="book/{{ borrow.s_id.s_id }}/return" class="btn btn-warning">归还</a>
+                         <a href="book/{{ borrow.s_id.s_id }}/renew" class="btn btn-warning">续借</a>
+                    </td>
+                {% else %}
+                    <td>
+                        <a href="" class="btn btn-warning", disabled="disabled">已归还</a>
+                    </td>
+                {% endif %}
+
+            {% endfor %}
+            </tr>
+        </tbody>
+    </table>
+{% endblock body %}

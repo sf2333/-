@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block title %}
+    <title>书籍管理界面</title>
+{% endblock title %}
+
+{% block head %}
+    <li><a href="">书籍管理界面</a></li>
+{% endblock head %}
+
+{% block return %}
+    <nav aria-label="...">
+        <ul class="pager">
+            <li class="previous"><a href="/book/add"><span aria-hidden="true"></span>添加书籍</a>
+            </li>
+
+            <li class="previous"><a href="/query_books"><span aria-hidden="true"></span>查找书籍</a>
+            </li>
+
+            <li class="previous"><a href="/return_books"><span aria-hidden="true"></span>归还书籍</a>
+            </li>
+        </ul>
+    </nav>
+
+{% endblock return %}
+
+{% block body %}
+    <table class="table table-bordered table-hover table-striped">
+        <thead>
+        <tr>
+            <th>序号</th>
+            <th>编号</th>
+            <th>书籍名称</th>
+            <th>价格</th>
+            <th>出版日期</th>
+            <th>作者</th>
+            <th>出版社</th>
+            <th>总量</th>
+            <th>当前余量</th>
+            <th>存放位置</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for book in book_list %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ book.id }}</td>
+                <td>{{ book.name }}</td>
+                <td>{{ book.price }}</td>
+                <td>{{ book.pub_date|date:"Y-m-d" }}</td>
+                <td>{{ book.author }}</td>
+                <td>{{ book.house }}</td>
+                <td>{{ book.sum }}</td>
+                <td>{{ book.remain }}</td>
+                <td>{{ book.pos }}</td>
+                <td>
+                    <a href="book/{{ book.pk }}/change" class="btn btn-warning">编辑</a>
+                    <a href="book/{{ book.pk }}/borrow" class="btn btn-warning">借阅</a>
+                    <a href="book/{{ book.pk }}/order" class="btn btn-warning">预约</a>
+                    <a href="book/{{ book.pk }}/delete" class="btn btn-danger">删除</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock body %}
